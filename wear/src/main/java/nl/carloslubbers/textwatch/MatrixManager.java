@@ -40,16 +40,29 @@ public class MatrixManager {
             {"T", "E", "N", "S", "O", "'", "C", "L", "O", "C", "K", "\n"}
     };
     private String MATRIX_DE[][] = new String[][]{
-            {"E", "S", "K", "I", "S", "T", "A", "F", "Ü", "N", "F", ""},  // 0
-            {"Z", "E", "H", "N", "B", "Y", "G", "V", "O", "R", "G", "\n"},// 1
-            {"N", "A", "C", "H", "V", "I", "E", "R", "T", "E", "L", ""},  // 2
-            {"H", "A", "L", "B", "V", "O", "R", "N", "A", "C", "H", "\n"},// 3
-            {"E", "I", "N", "S", "L", "M", "E", "Z", "W", "E", "I", ""},  // 4
-            {"D", "R", "E", "I", "A", "U", "J", "V", "I", "E", "R", "\n"},// 5
-            {"F", "Ü", "N", "F", "T", "O", "S", "E", "C", "H", "S", ""},  // 6
-            {"S", "I", "E", "B", "E", "N", "L", "A", "C", "H", "T", "\n"},// 7
-            {"N", "E", "U", "N", "Z", "E", "H", "N", "E", "L", "F", ""},  // 8
-            {"Z", "W", "Ö", "L", "F", "U", "N", "K", "U", "H", "R", "\n"} // 9
+            {"E", "S", "K", "I", "S", "T", "A", "F", "Ü", "N", "F", ""},
+            {"Z", "E", "H", "N", "B", "Y", "G", "V", "O", "R", "G", "\n"},
+            {"N", "A", "C", "H", "V", "I", "E", "R", "T", "E", "L", ""},
+            {"H", "A", "L", "B", "V", "O", "R", "N", "A", "C", "H", "\n"},
+            {"E", "I", "N", "S", "L", "M", "E", "Z", "W", "E", "I", ""},
+            {"D", "R", "E", "I", "A", "U", "J", "V", "I", "E", "R", "\n"},
+            {"F", "Ü", "N", "F", "T", "O", "S", "E", "C", "H", "S", ""},
+            {"S", "I", "E", "B", "E", "N", "L", "A", "C", "H", "T", "\n"},
+            {"N", "E", "U", "N", "Z", "E", "H", "N", "E", "L", "F", ""},
+            {"Z", "W", "Ö", "L", "F", "U", "N", "K", "U", "H", "R", "\n"}
+    };
+
+    private String MATRIX_NL[][] = new String[][]{
+            {"H", "E", "T", "O", "I", "S", "A", "V", "I", "J", "F", ""},
+            {"T", "I", "E", "N", "B", "Y", "V", "O", "O", "R", "G", "\n"},
+            {"K", "W", "A", "R", "T", "W", "O", "V", "E", "R", "H", ""},
+            {"H", "A", "L", "F", "H", "V", "O", "O", "R", "C", "H", "\n"},
+            {"E", "E", "N", "R", "L", "M", "E", "T", "W", "E", "E", ""},
+            {"D", "R", "I", "E", "A", "U", "J", "V", "I", "E", "R", "\n"},
+            {"V", "I", "J", "F", "Z", "E", "S", "E", "L", "F", "S", ""},
+            {"Z", "E", "V", "E", "E", "N", "L", "A", "C", "H", "T", "\n"},
+            {"N", "E", "G", "E", "N", "T", "I", "E", "N", "L", "F", ""},
+            {"T", "W", "A", "A", "L", "F", "N", "K", "U", "U", "R", "\n"}
     };
 
     private int VALUES_EN[][] = new int[][]{
@@ -107,7 +120,36 @@ public class MatrixManager {
             {2, 0, 3}, // NACH-1 (23)
             {3, 7, 10}, // NACH-2 (24)
     };
-    private String language = "de";
+    private int VALUES_NL[][] = new int[][]{
+            {0, 0, 2}, // HET
+            {0, 4, 5}, // IS
+            {9, 0, 5}, // TWAALF
+            {4, 0, 2}, // EEN
+            {4, 7, 10}, // TWEE
+            {5, 0, 3}, // DRIE
+            {5, 7, 10}, // VIER
+            {6, 0, 3}, // VIJF
+            {6, 4, 6}, // ZES
+            {7, 0, 5}, // ZEVEN
+            {7, 7, 10}, // ACHT
+            {8, 0, 4}, // NEGEN
+            {8, 5, 8}, // TIEN
+            {6, 7, 9}, // ELF
+
+            {9, 8, 10}, // UUR (14)
+            {0, 7, 10}, // VIJF (15)
+            {1, 0, 3}, // TIEN (16)
+            {2, 0, 4}, // KWART (17)
+            {0, 0, 0}, // 20
+            {0, 0, 0}, // 25
+            {3, 0, 3}, // HALF (20)
+            {1, 6, 9}, // VOOR-1 (21)
+            {3, 5, 8}, // VOOR-2 (22)
+            {2, 6, 9}, // OVER-1 (23)
+            {3, 7, 10}, // OVER-2 (24)
+    };
+
+    private String language = "en";
 
 
     public MatrixManager(WatchFace wf) {
@@ -211,6 +253,72 @@ public class MatrixManager {
                     break;
 
             }
+        } else if (language.equals("nl")) {
+            switch (m5) {
+                case 0:
+                    // UUR
+                    setStatus(14);
+                    break;
+                case 1:
+                    // VIJF OVER
+                    setStatus(15);
+                    setStatus(23);
+                    break;
+                case 2:
+                    // TIEN OVER
+                    setStatus(16);
+                    setStatus(23);
+                    break;
+                case 3:
+                    // KWART OVER
+                    setStatus(17);
+                    setStatus(24);
+                    break;
+                case 4:
+                    // TIEN VOOR HALF
+                    setStatus(16);
+                    setStatus(21);
+                    setStatus(20);
+                    break;
+                case 5:
+                    // VIJF VOOR HALF
+                    setStatus(15);
+                    setStatus(21);
+                    setStatus(20);
+                    break;
+                case 6:
+                    // HALF
+                    setStatus(20);
+                    break;
+                case 7:
+                    // VIJF OVER HALF
+                    setStatus(15);
+                    setStatus(23);
+                    setStatus(20);
+                    break;
+                case 8:
+                    // TIEN OVER HALF
+                    setStatus(16);
+                    setStatus(23);
+                    setStatus(20);
+                    break;
+                case 9:
+                    // KWART VOOR
+                    setStatus(17);
+                    setStatus(22);
+                    break;
+                case 10:
+                    // TIEN VOOR
+                    setStatus(16);
+                    setStatus(22);
+                    break;
+                case 11:
+                    // VIJF VOOR
+                    setStatus(15);
+                    setStatus(22);
+                    break;
+
+            }
         } else if (language.equals("en")) {
             switch (m5) {
                 case 0:
@@ -299,6 +407,8 @@ public class MatrixManager {
             return MATRIX_EN;
         } else if (language.equals("de")) {
             return MATRIX_DE;
+        } else if (language.equals("nl")) {
+            return MATRIX_NL;
         } else {
             return MATRIX_EN;
         }
@@ -309,6 +419,8 @@ public class MatrixManager {
             return VALUES_EN;
         } else if (language.equals("de")) {
             return VALUES_DE;
+        } else if (language.equals("nl")) {
+            return VALUES_NL;
         } else {
             return VALUES_EN;
         }
@@ -326,6 +438,7 @@ public class MatrixManager {
     }
 
     public void setLanguage(String lang) {
+        watchFace.editor.putString("lang", lang).apply();
         language = lang;
     }
 }

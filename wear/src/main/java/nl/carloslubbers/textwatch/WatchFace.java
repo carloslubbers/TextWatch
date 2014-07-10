@@ -57,6 +57,10 @@ public class WatchFace extends Activity {
         super.onCreate(bundle);
         setContentView(R.layout.activity_watch_face);
 
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = settings.edit();
+        matrixManager = new MatrixManager(this);
+        messageListener = new MessageListener(this);
         initConfig();
 
         callAsynchronousTask();
@@ -84,12 +88,8 @@ public class WatchFace extends Activity {
 
     private void initConfig() {
         // Restore preferences
-        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        editor = settings.edit();
 
-        matrixManager = new MatrixManager(this);
-        messageListener = new MessageListener(this);
-
+        matrixManager.setLanguage(settings.getString("lang", "en"));
         setHeight(Integer.parseInt(settings.getString("height", "3")));
         setWatchTheme(settings.getString("theme", "dark"));
         Typeface typeface = Typeface.createFromAsset(getAssets(), "Anonymous.ttf");
