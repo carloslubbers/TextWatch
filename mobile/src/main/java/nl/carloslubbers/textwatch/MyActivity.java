@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -43,7 +42,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
         // Define elements
         final SeekBar sb = (SeekBar) findViewById(R.id.seekBar);
-        final TextView statusText = (TextView) findViewById(R.id.statusText);
         final Button darkRadio = (Button) findViewById(R.id.radioButton);
         final Button lightRadio = (Button) findViewById(R.id.radioButton2);
         darkRadio.setOnClickListener(this);
@@ -54,7 +52,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                editor.putString("height", String.valueOf(i)).commit();
+                editor.putString("height", String.valueOf(i)).apply();
                 updateHeight(i);
             }
 
@@ -172,10 +170,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
     /**
