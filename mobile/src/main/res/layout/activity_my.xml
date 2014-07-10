@@ -64,4 +64,31 @@
         android:layout_alignParentStart="true"
         android:text="@string/disclaimer" />
 
+    <Button
+        android:id="@+id/enButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioButton2"
+        android:text="English" />
+
+    <Button
+        android:id="@+id/deButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/enButton"
+        android:layout_toRightOf="@+id/enButton"
+        android:text="Deutsch" />
+
+    <Button
+        android:id="@+id/nlButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/deButton"
+        android:layout_toRightOf="@+id/deButton"
+        android:text="Nederlands" />
+
 </RelativeLayout>

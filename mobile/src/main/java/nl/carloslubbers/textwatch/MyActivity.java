@@ -44,6 +44,12 @@ public class MyActivity extends Activity implements View.OnClickListener {
         final SeekBar sb = (SeekBar) findViewById(R.id.seekBar);
         final Button darkRadio = (Button) findViewById(R.id.radioButton);
         final Button lightRadio = (Button) findViewById(R.id.radioButton2);
+        final Button enButton = (Button) findViewById(R.id.enButton);
+        final Button deButton = (Button) findViewById(R.id.deButton);
+        final Button nlButton = (Button) findViewById(R.id.nlButton);
+        enButton.setOnClickListener(this);
+        deButton.setOnClickListener(this);
+        nlButton.setOnClickListener(this);
         darkRadio.setOnClickListener(this);
         lightRadio.setOnClickListener(this);
 
@@ -104,7 +110,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
      * @param t The theme identifier
      */
     private void setWatchTheme(String t) {
-
         sendMessage("/config/theme/" + t);
     }
 
@@ -196,7 +201,20 @@ public class MyActivity extends Activity implements View.OnClickListener {
             case R.id.radioButton2:
                 setWatchTheme("light");
                 break;
+            case R.id.enButton:
+                setLanguage("en");
+                break;
+            case R.id.deButton:
+                setLanguage("de");
+                break;
+            case R.id.nlButton:
+                setLanguage("nl");
+                break;
         }
 
+    }
+
+    private void setLanguage(String lang) {
+        sendMessage("/config/lang/" + lang);
     }
 }
