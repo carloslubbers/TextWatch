@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TextWatch</string>
+    <string name="action_settings">Settings</string>
+    <string name="height_label">Set height of the text (0 = center, 5 = top)</string>
+    <string name="theme_dark">Apply Dark Theme</string>
+    <string name="theme_light">Apply Light Theme</string>
+    <string name="disclaimer">Thank you for using my watch face! These customization options are VERY beta, they might not always work. Also, it is currently not possible to change UI elements like the cards size or the \"OK Google\" text without root!\n\nIf you have any questions or suggestions please send me an e-mail via the Play Store.</string>
+
+</resources>
