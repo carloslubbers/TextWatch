@@ -1,7 +1,3 @@
-// Decompiled by Jad v1.5.8e. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.geocities.com/kpdus/jad.html
-// Decompiler options: braces fieldsfirst space lnc 
-
 package nl.carloslubbers.textwatch;
 
 import android.app.Activity;
@@ -14,97 +10,49 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.MessageEvent;
-import com.google.android.gms.wearable.Node;
-import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class WatchFace extends Activity implements MessageApi.MessageListener, GoogleApiClient.ConnectionCallbacks {
 
-    public static final String START_ACTIVITY_PATH = "/config/update";
     private static final String TAG = "TextWatch";
     private static final String MATRIX[][] = {
-            {
-                    "I", "T", "H", "I", "S", "U", "Q", "J", "S", "P",
-                    "G", ""
-            }, {
-            "A", "C", "Q", "U", "A", "R", "T", "E", "R", "D",
-            "C", "\n"
-    }, {
-            "T", "W", "E", "N", "T", "Y", "F", "I", "V", "E",
-            "X", ""
-    }, {
-            "H", "A", "L", "F", "B", "T", "E", "N", "F", "T",
-            "O", "\n"
-    }, {
-            "P", "A", "S", "T", "E", "R", "U", "N", "I", "N",
-            "E", ""
-    }, {
-            "O", "N", "E", "S", "I", "X", "T", "H", "R", "E",
-            "E", "\n"
-    }, {
-            "F", "O", "U", "R", "F", "I", "V", "E", "T", "W",
-            "O", ""
-    }, {
-            "E", "I", "G", "H", "T", "E", "L", "E", "V", "E",
-            "N", "\n"
-    }, {
-            "S", "E", "V", "E", "N", "T", "W", "E", "L", "V",
-            "E", ""
-    }, {
-            "T", "E", "N", "S", "O", "'", "C", "L", "O", "C",
-            "K", "\n\n\n\n"
-    }
+            {"I", "T", "H", "I", "S", "U", "Q", "J", "S", "P", "G", ""},
+            {"A", "C", "Q", "U", "A", "R", "T", "E", "R", "D", "C", "\n"},
+            {"T", "W", "E", "N", "T", "Y", "F", "I", "V", "E", "X", ""},
+            {"H", "A", "L", "F", "B", "T", "E", "N", "F", "T", "O", "\n"},
+            {"P", "A", "S", "T", "E", "R", "U", "N", "I", "N", "E", ""},
+            {"O", "N", "E", "S", "I", "X", "T", "H", "R", "E", "E", "\n"},
+            {"F", "O", "U", "R", "F", "I", "V", "E", "T", "W", "O", ""},
+            {"E", "I", "G", "H", "T", "E", "L", "E", "V", "E", "N", "\n"},
+            {"S", "E", "V", "E", "N", "T", "W", "E", "L", "V", "E", ""},
+            {"T", "E", "N", "S", "O", "'", "C", "L", "O", "C", "K", "\n\n\n\n"}
     };
     private static int STATUS[][] = {
-            {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0
-            }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0
-    }
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
+
     private GoogleApiClient mGoogleApiClient;
-    private List<Node> nodes;
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
 
@@ -112,17 +60,30 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
     private String lightColor = "white";
     private int backgroundColor = Color.argb(255, 0, 0, 0);
 
+    /**
+     * Add Google API Client listener
+     *
+     * @param bundle The bundle
+     */
     @Override
     public void onConnected(Bundle bundle) {
         Wearable.MessageApi.addListener(mGoogleApiClient, this);
     }
 
+    /**
+     * Remove Google API Client listener
+     *
+     * @param i I don't even know
+     */
     @Override
     public void onConnectionSuspended(int i) {
         Wearable.MessageApi.removeListener(mGoogleApiClient, this);
 
     }
 
+    /**
+     * Starts the asynchronous scheduled task to update the text
+     */
     public void callAsynchronousTask() {
         final Handler handler = new Handler();
         Timer timer = new Timer();
@@ -133,9 +94,8 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
                     public void run() {
                         try {
                             TimeTask performBackgroundTask = new TimeTask();
-                            // PerformBackgroundTask this class is the class that extends AsynchTask
                             performBackgroundTask.execute();
-                        } catch (Exception e) {
+                        } catch (Exception ignored) {
                         }
                     }
                 });
@@ -208,23 +168,14 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
         mGoogleApiClient.connect();
     }
 
-    private List<Node> getNodes() {
-        List<Node> nodes = new ArrayList<Node>();
-        NodeApi.GetConnectedNodesResult rawNodes =
-                Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).await();
-        for (Node node : rawNodes.getNodes()) {
-            nodes.add(node);
-        }
-        return nodes;
-    }
-
+    /**
+     * Method fired when a message is received from the paired device. Runs on a background thread.
+     *
+     * @param messageEvent The message object
+     */
     @Override
     public void onMessageReceived(final MessageEvent messageEvent) {
-
-        /*
-        This method apparently runs in a background thread.
-         */
-
+        // Run this on the UI thread
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -238,13 +189,16 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
                     setWatchTheme(t);
                 }
             }
-            // soon.
         });
 
         Log.v(TAG, "Message received on wear: " + messageEvent.getPath());
-
     }
 
+    /**
+     * Sets the text height
+     *
+     * @param h Amount of lines to move the text up
+     */
     private void setHeight(int h) {
         Log.v("TextWatch", "Height: " + h);
         editor.putString("height", String.valueOf(h));
@@ -255,6 +209,11 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
         }
     }
 
+    /**
+     * Set the watch theme (currently light or dark)
+     *
+     * @param t The theme identifier
+     */
     private void setWatchTheme(String t) {
         if (t.equals("dark")) {
             editor.putString("theme", "dark").commit();
@@ -273,6 +232,9 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
         }
     }
 
+    /**
+     * The Asynchronous task that updates the text
+     */
     protected class TimeTask extends AsyncTask<Void, Integer, Void> {
 
         @Override
@@ -294,6 +256,11 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
             setTime((TextView) findViewById(R.id.textView));
         }
 
+        /**
+         * Get the time and set the status values
+         *
+         * @param textview The textview that needs to be edited
+         */
         public void setTime(TextView textview) {
             int h12;
             int m5;
@@ -309,6 +276,8 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
                 h12 += 1;
                 if (h12 > 11) h12 = 0;
             }
+
+            // Reset the status matrix
             for (int i1 = 0; i1 < MATRIX.length; i1++) {
                 for (int l1 = 0; l1 < MATRIX[i1].length; l1++) {
                     STATUS[i1][l1] = 0;
@@ -316,6 +285,7 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
 
             }
 
+            // Oh god this needs to be done better to add support for new languages.
             STATUS[0][0] = 1;
             STATUS[0][1] = 1;
             STATUS[0][3] = 1;
@@ -532,6 +502,8 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
                     STATUS[3][10] = 1;
                     break;
             }
+
+            // Format the text and set it in the view
             String s = "<font color='" + darkColor + "'>";
             for (int j1 = 0; j1 < MATRIX.length; j1++) {
                 int k1 = 0;
@@ -539,12 +511,12 @@ public class WatchFace extends Activity implements MessageApi.MessageListener, G
                     if (STATUS[j1][k1] == 0) {
                         s = (new StringBuilder()).append(s).append(MATRIX[j1][k1]).toString();
                     } else {
-                        s = (new StringBuilder()).append(s).append("</font><font color=").append(lightColor).append(">").append(MATRIX[j1][k1]).append("</font><font color='" + darkColor + "'>").toString();
+                        s = (new StringBuilder()).append(s).append("</font><font color=").append(lightColor).append(">").append(MATRIX[j1][k1]).append("</font><font color='").append(darkColor).append("'>").toString();
                     }
                     k1++;
                 }
             }
-            ((ImageView) findViewById(R.id.background)).setBackgroundColor(backgroundColor);
+            findViewById(R.id.background).setBackgroundColor(backgroundColor);
             textview.setText(Html.fromHtml((new StringBuilder()).append(s).append("</font>").toString()));
         }
     }
