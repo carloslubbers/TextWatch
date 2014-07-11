@@ -168,13 +168,13 @@ public class MatrixManager {
         calendar.setTime(date);
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int m = calendar.get(Calendar.MINUTE);
+        if (m > 60) m = 0;
+        if (h > 12) h = 0;
+        watchFace.editor.putInt("h", h + 1).putInt("m", m + 1).apply();
         h12 = h % 12;
         m5 = (int) Math.floor(m / 5);
-        if (m5 >= 7) {
-            h12 += 1;
-            if (h12 > 11) h12 = 0;
-        }
 
+        Log.d(WatchFace.TAG, m5 + " " + h12 + " " + h + ":" + m);
         // Reset the status matrix
         for (int i1 = 0; i1 < matrix.length; i1++)
             for (int l1 = 0; l1 < matrix[i1].length; l1++) {
@@ -184,7 +184,26 @@ public class MatrixManager {
         // Switching for the values
         setStatus(0); // it
         setStatus(1); // is
-        setStatus(h12 + 2); // hour
+
+        // Hour
+        if (language.equals("en")) {
+            if (m5 >= 7) {
+                h12 += 1;
+                if (h12 > 11) h12 = 0;
+            }
+            setStatus(h12 + 2); // hour
+        } else if (language.equals("de") || language.equals("nl")) {
+            if (m5 >= 4) {
+                if (h12 + 3 == 14) {
+                    setStatus(2);
+                } else {
+                    setStatus(h12 + 3);
+                }
+            } else {
+                if (h12 > 11) h12 = 0;
+                setStatus(h12 + 2);
+            }
+        }
 
         // Minute
         if (language.equals("de")) {
@@ -272,7 +291,7 @@ public class MatrixManager {
                 case 3:
                     // KWART OVER
                     setStatus(17);
-                    setStatus(24);
+                    setStatus(23);
                     break;
                 case 4:
                     // TIEN VOOR HALF

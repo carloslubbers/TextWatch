@@ -49,7 +49,7 @@ public class WatchFace extends Activity {
                 });
             }
         };
-        timer.schedule(doAsynchronousTask, 0, 3000);
+        timer.schedule(doAsynchronousTask, 0, 1000);
     }
 
     protected void onCreate(Bundle bundle) {
@@ -72,12 +72,17 @@ public class WatchFace extends Activity {
         Log.v("WatchFace", "onPause();");
         super.onPause();
         setWatchTheme("pause");
+
+        initConfig();
+
+        callAsynchronousTask();
+
+        googleApiConnect();
     }
 
     protected void onResume() {
         Log.v("WatchFace", "onResume();");
         super.onResume();
-        setContentView(R.layout.activity_watch_face);
 
         initConfig();
 
