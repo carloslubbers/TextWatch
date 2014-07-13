@@ -14,28 +14,26 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Wearable;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class WatchFace extends Activity {
 
     protected static final String TAG = "TextWatch";
-
+    final Handler handler = new Handler();
+    final WatchFace thisFace = this;
     public GoogleApiClient mGoogleApiClient;
     public SharedPreferences settings;
     public SharedPreferences.Editor editor;
     public MatrixManager matrixManager;
     public String heightString = "";
     private MessageListener messageListener;
-
+    private TimerTask doAsynchronousTask = null;
     /**
      * Starts the asynchronous scheduled task to update the text
      */
     public void callAsynchronousTask() {
-        final Handler handler = new Handler();
-        Timer timer = new Timer();
-        final WatchFace thisFace = this;
-        TimerTask doAsynchronousTask = new TimerTask() {
+        doAsynchronousTask = null;
+        doAsynchronousTask = new TimerTask() {
             @Override
             public void run() {
                 handler.post(new Runnable() {
@@ -43,13 +41,17 @@ public class WatchFace extends Activity {
                         try {
                             TimeTask performBackgroundTask = new TimeTask(thisFace, matrixManager);
                             performBackgroundTask.execute();
+
+                            handler.postDelayed(this, 1000);
                         } catch (Exception ignored) {
                         }
-                    }
+                        }
                 });
             }
         };
-        timer.schedule(doAsynchronousTask, 0, 1000);
+        handler.postDelayed(doAsynchronousTask, 1000);
+        // timer.schedule(doAsynchronousTask, 0, 1000);
+
     }
 
     protected void onCreate(Bundle bundle) {
@@ -75,8 +77,6 @@ public class WatchFace extends Activity {
 
         initConfig();
 
-        callAsynchronousTask();
-
         googleApiConnect();
     }
 
@@ -85,8 +85,6 @@ public class WatchFace extends Activity {
         super.onResume();
 
         initConfig();
-
-        callAsynchronousTask();
 
         googleApiConnect();
     }
@@ -97,6 +95,8 @@ public class WatchFace extends Activity {
         matrixManager.setLanguage(settings.getString("lang", "en"));
         setHeight(Integer.parseInt(settings.getString("height", "3")));
         setWatchTheme(settings.getString("theme", "dark"));
+        setPadding(settings.getInt("padding", 3));
+        setFontSize(settings.getInt("fontsize", 0));
         Typeface typeface = Typeface.createFromAsset(getAssets(), "Anonymous.ttf");
         ((TextView) findViewById(R.id.textView)).setTypeface(typeface);
     }
@@ -157,7 +157,13 @@ public class WatchFace extends Activity {
         }
     }
 
+    protected void setPadding(int p) {
+        editor.putInt("padding", p).apply();
+        (findViewById(R.id.textView)).setPadding(p, 0, 0, 0);
+    }
 
-
-
+    public void setFontSize(int i) {
+        editor.putInt("fontsize", i).apply();
+        ((TextView) findViewById(R.id.textView)).setTextSize((float) (13 + 0.1 * i));
+    }
 }

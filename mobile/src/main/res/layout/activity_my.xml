@@ -22,9 +22,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/seekBar"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="22dp"
+        android:layout_alignTop="@+id/statusText"
         android:text="@string/height_label" />
 
     <TextView
@@ -38,10 +38,9 @@
         android:id="@+id/radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/seekBar"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/seekBar"
-        android:layout_marginTop="23dp"
+        android:layout_below="@+id/fontBar"
         android:checked="false"
         android:text="@string/theme_dark" />
 
@@ -49,7 +48,8 @@
         android:id="@+id/radioButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/radioButton"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/radioButton"
         android:checked="false"
@@ -78,7 +78,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/enButton"
+        android:layout_below="@+id/radioButton2"
         android:layout_toRightOf="@+id/enButton"
         android:text="Deutsch" />
 
@@ -87,8 +87,47 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/deButton"
+        android:layout_below="@+id/radioButton2"
         android:layout_toRightOf="@+id/deButton"
         android:text="Nederlands" />
+
+    <SeekBar
+        android:id="@+id/paddingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/fontBar"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:longClickable="false"
+        android:max="30" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/seekBar"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/seekBar"
+        android:text="@string/padding_label" />
+
+    <SeekBar
+        android:id="@+id/fontBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/radioButton"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:indeterminate="false"
+        android:longClickable="false"
+        android:max="30" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/fontBar"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/paddingBar"
+        android:text="@string/label_fontsize" />
 
 </RelativeLayout>

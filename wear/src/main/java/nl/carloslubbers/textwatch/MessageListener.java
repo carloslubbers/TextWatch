@@ -39,6 +39,12 @@ public class MessageListener implements MessageApi.MessageListener, GoogleApiCli
                 } else if (cmd.startsWith("/config/lang/")) {
                     String t = cmd.replace("/config/lang/", "");
                     watchFace.matrixManager.setLanguage(t);
+                } else if (cmd.startsWith("/config/padding/")) {
+                    String t = cmd.replace("/config/padding/", "");
+                    watchFace.setPadding(Integer.parseInt(t));
+                } else if (cmd.startsWith("/config/fontsize/")) {
+                    String t = cmd.replace("/config/fontsize/", "");
+                    watchFace.setFontSize(Integer.parseInt(t));
                 }
             }
         });

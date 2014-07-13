@@ -60,7 +60,7 @@ public class MatrixManager {
             {"E", "E", "N", "R", "L", "M", "E", "T", "W", "E", "E", ""},
             {"D", "R", "I", "E", "A", "U", "J", "V", "I", "E", "R", "\n"},
             {"V", "I", "J", "F", "Z", "E", "S", "E", "L", "F", "S", ""},
-            {"Z", "E", "V", "E", "E", "N", "L", "A", "C", "H", "T", "\n"},
+            {"Z", "E", "V", "E", "N", "A", "L", "A", "C", "H", "T", "\n"},
             {"N", "E", "G", "E", "N", "T", "I", "E", "N", "L", "F", ""},
             {"T", "W", "A", "A", "L", "F", "N", "K", "U", "U", "R", "\n"}
     };
@@ -130,7 +130,7 @@ public class MatrixManager {
             {5, 7, 10}, // VIER
             {6, 0, 3}, // VIJF
             {6, 4, 6}, // ZES
-            {7, 0, 5}, // ZEVEN
+            {7, 0, 4}, // ZEVEN
             {7, 7, 10}, // ACHT
             {8, 0, 4}, // NEGEN
             {8, 5, 8}, // TIEN
@@ -168,8 +168,8 @@ public class MatrixManager {
         calendar.setTime(date);
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int m = calendar.get(Calendar.MINUTE);
-        if (m > 60) m = 0;
-        if (h > 12) h = 0;
+        // if (m > 60) m = 0;
+        // if (h > 12) h = 0;
         watchFace.editor.putInt("h", h + 1).putInt("m", m + 1).apply();
         h12 = h % 12;
         m5 = (int) Math.floor(m / 5);
@@ -181,7 +181,7 @@ public class MatrixManager {
                 status[i1][l1] = 0;
             }
 
-        // Switching for the values
+        // It is...
         setStatus(0); // it
         setStatus(1); // is
 
@@ -371,8 +371,9 @@ public class MatrixManager {
                     setStatus(23);
                     break;
                 case 6:
-                    // HALF
+                    // HALF PAST
                     setStatus(21);
+                    setStatus(23);
                     break;
                 case 7:
                     // TWENTYFIVE TO

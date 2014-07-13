@@ -41,7 +41,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
         final SharedPreferences.Editor editor = settings.edit();
 
         // Define elements
-        final SeekBar sb = (SeekBar) findViewById(R.id.seekBar);
+        final SeekBar heightBar = (SeekBar) findViewById(R.id.seekBar);
+        final SeekBar paddingBar = (SeekBar) findViewById(R.id.paddingBar);
+        final SeekBar fontBar = (SeekBar) findViewById(R.id.fontBar);
         final Button darkRadio = (Button) findViewById(R.id.radioButton);
         final Button lightRadio = (Button) findViewById(R.id.radioButton2);
         final Button enButton = (Button) findViewById(R.id.enButton);
@@ -54,8 +56,8 @@ public class MyActivity extends Activity implements View.OnClickListener {
         lightRadio.setOnClickListener(this);
 
         // Restore seeker
-        sb.setProgress(Integer.parseInt(settings.getString("height", "5")));
-        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        heightBar.setProgress(Integer.parseInt(settings.getString("height", "5")));
+        heightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 editor.putString("height", String.valueOf(i)).apply();
@@ -68,6 +70,44 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        paddingBar.setProgress(settings.getInt("padding", 0));
+        paddingBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                editor.putInt("padding", i).apply();
+                updatePadding(i + 3);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        fontBar.setProgress(settings.getInt("fontsize", 0));
+        fontBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                editor.putInt("fontsize", i).apply();
+                updateFontSize(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 
@@ -102,6 +142,19 @@ public class MyActivity extends Activity implements View.OnClickListener {
             setWatchTheme("light");
         }
 
+    }
+
+    private void updateFontSize(int i) {
+        sendMessage("/config/fontsize/" + i);
+    }
+
+    /**
+     * Send a message to change the padding on the text
+     *
+     * @param i left padding in dp
+     */
+    private void updatePadding(int i) {
+        sendMessage("/config/padding/" + i);
     }
 
     /**
