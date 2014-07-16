@@ -65,6 +65,18 @@ public class MatrixManager {
             {"T", "W", "A", "A", "L", "F", "N", "K", "U", "U", "R", "\n"}
     };
 
+    private String MATRIX_FR[][] = new String[][]{
+            {"I", "L", "N", "E", "S", "T", "O", "U", "N", "E", "R", ""},
+            {"D", "E", "U", "X", "N", "U", "T", "R", "O", "I", "S", "\n"},
+            {"Q", "U", "A", "T", "R", "E", "D", "O", "U", "Z", "E", ""},
+            {"C", "I", "N", "Q", "S", "I", "X", "S", "E", "P", "T", "\n"},
+            {"H", "U", "I", "T", "N", "E", "U", "F", "D", "I", "X", ""},
+            {"O", "N", "Z", "E", "R", "H", "E", "U", "R", "E", "S", "\n"},
+            {"M", "O", "I", "N", "S", "O", "L", "E", "D", "I", "X", ""},
+            {"E", "T", "R", "Q", "U", "A", "R", "T", "R", "E", "D", "\n"},
+            {"V", "I", "N", "G", "T", "-", "C", "I", "N", "Q", "U", ""},
+            {"E", "T", "S", "D", "E", "M", "I", "E", "P", "A", "N", "\n"}
+    };
     private int VALUES_EN[][] = new int[][]{
             {0, 0, 1}, // IT
             {0, 3, 4}, // IS
@@ -149,12 +161,43 @@ public class MatrixManager {
             {3, 7, 10}, // OVER-2 (24)
     };
 
-    private String language = "en";
+    private int VALUES_FR[][] = new int[][]{
+            {0, 0, 1}, // IL
+            {0, 3, 5}, // EST
+            {2, 6, 10}, // DOUZE
+            {0, 7, 9}, // UNE
+            {1, 0, 3}, // DEUX
+            {1, 6, 10}, // TROIS
+            {2, 0, 5}, // QUATRE
+            {3, 0, 3}, // CINQ
+            {3, 4, 6}, // SIX
+            {3, 7, 10}, // SEPT
+            {4, 0, 3}, // HUIT
+            {4, 4, 7}, // NEUF
+            {4, 8, 10}, // DIX
+            {5, 0, 3}, // ONZE
+
+            {5, 5, 10}, // HEURES (14)
+            {5, 5, 9}, // HEURE 15
+            {7, 0, 1}, // ET-1 16
+            {8, 6, 9}, // CINQ 17
+            {6, 8, 10}, // DIX 18
+            {7, 3, 7}, // QUART 19
+            {8, 0, 4}, // VINGT 20
+            {8, 0, 9}, // VINGT-CINQ 21
+            {9, 3, 7}, // DEMIE 22
+            {6, 0, 4}, // MOINS 23
+            {9, 0, 1}, // ET-2 24
+            {6, 6, 7}, // LE 25
+    };
+
+
+    private String language = "fr";
 
 
     public MatrixManager(WatchFace wf) {
         watchFace = wf;
-        setLanguage(watchFace.settings.getString("lang", "en"));
+        setLanguage(watchFace.settings.getString("lang", "fr"));
     }
 
     public void updateText(TextView tv) {
@@ -168,8 +211,10 @@ public class MatrixManager {
         calendar.setTime(date);
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int m = calendar.get(Calendar.MINUTE);
-        // if (m > 60) m = 0;
-        // if (h > 12) h = 0;
+        //int h = watchFace.settings.getInt("h", 0);
+        //int m = watchFace.settings.getInt("m", 0);
+        if (m > 60) m = 0;
+        if (h > 12) h = 0;
         watchFace.editor.putInt("h", h + 1).putInt("m", m + 1).apply();
         h12 = h % 12;
         m5 = (int) Math.floor(m / 5);
@@ -203,6 +248,30 @@ public class MatrixManager {
                 if (h12 > 11) h12 = 0;
                 setStatus(h12 + 2);
             }
+        } else if (language.equals("fr")) {
+
+            if (m5 > 6) {
+                if (h12 + 3 == 3) {
+                    setStatus(15);
+                } else {
+                    setStatus(14);
+                }
+                if (h12 + 3 == 14) {
+                    setStatus(2);
+                } else {
+                    setStatus(h12 + 3);
+                }
+            } else {
+                if (h12 + 2 == 3) {
+                    setStatus(15);
+                } else {
+                    setStatus(14);
+                }
+                if (h12 > 11) h12 = 0;
+                setStatus(h12 + 2);
+            }
+
+
         }
 
         // Minute
@@ -402,6 +471,65 @@ public class MatrixManager {
                     setStatus(22);
                     break;
             }
+        } else if (language.equals("fr")) {
+            switch (m5) {
+                case 0:
+                    // HEURE
+                    break;
+                case 1:
+                    // CINQ
+                    setStatus(17);
+                    break;
+                case 2:
+                    // DIX
+                    setStatus(18);
+                    break;
+                case 3:
+                    // ET QUART
+                    setStatus(16);
+                    setStatus(19);
+                    break;
+                case 4:
+                    // VINGT
+                    setStatus(20);
+                    break;
+                case 5:
+                    // VINGT-CINQ
+                    setStatus(21);
+                    break;
+                case 6:
+                    // ET DEMIE
+                    setStatus(24);
+                    setStatus(22);
+                    break;
+                case 7:
+                    // MOINS VINGT-CINQ
+                    setStatus(23);
+                    setStatus(21);
+                    break;
+                case 8:
+                    // MOINS VINGT
+                    setStatus(23);
+                    setStatus(20);
+                    break;
+                case 9:
+                    // MOINS LE QUART
+                    setStatus(23);
+                    setStatus(25);
+                    setStatus(19);
+                    break;
+                case 10:
+                    // MOINS DIX
+                    setStatus(23);
+                    setStatus(18);
+                    break;
+                case 11:
+                    // MOINS CINQ
+                    setStatus(23);
+                    setStatus(17);
+                    break;
+
+            }
         }
 
         // Format the text and set it in the view
@@ -429,6 +557,8 @@ public class MatrixManager {
             return MATRIX_DE;
         } else if (language.equals("nl")) {
             return MATRIX_NL;
+        } else if (language.equals("fr")) {
+            return MATRIX_FR;
         } else {
             return MATRIX_EN;
         }
@@ -441,6 +571,8 @@ public class MatrixManager {
             return VALUES_DE;
         } else if (language.equals("nl")) {
             return VALUES_NL;
+        } else if (language.equals("fr")) {
+            return VALUES_FR;
         } else {
             return VALUES_EN;
         }
