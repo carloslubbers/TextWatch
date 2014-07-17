@@ -49,9 +49,11 @@ public class MyActivity extends Activity implements View.OnClickListener {
         final Button enButton = (Button) findViewById(R.id.enButton);
         final Button deButton = (Button) findViewById(R.id.deButton);
         final Button nlButton = (Button) findViewById(R.id.nlButton);
+        final Button frButton = (Button) findViewById(R.id.frButton);
         enButton.setOnClickListener(this);
         deButton.setOnClickListener(this);
         nlButton.setOnClickListener(this);
+        frButton.setOnClickListener(this);
         darkRadio.setOnClickListener(this);
         lightRadio.setOnClickListener(this);
 
@@ -262,6 +264,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.nlButton:
                 setLanguage("nl");
+                break;
+            case R.id.frButton:
+                setLanguage("fr");
                 break;
         }
 

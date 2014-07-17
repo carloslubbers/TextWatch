@@ -192,12 +192,12 @@ public class MatrixManager {
     };
 
 
-    private String language = "fr";
+    private String language = "en";
 
 
     public MatrixManager(WatchFace wf) {
         watchFace = wf;
-        setLanguage(watchFace.settings.getString("lang", "fr"));
+        setLanguage(watchFace.settings.getString("lang", "en"));
     }
 
     public void updateText(TextView tv) {
@@ -213,13 +213,14 @@ public class MatrixManager {
         int m = calendar.get(Calendar.MINUTE);
         //int h = watchFace.settings.getInt("h", 0);
         //int m = watchFace.settings.getInt("m", 0);
-        if (m > 60) m = 0;
-        if (h > 12) h = 0;
+        //if (m > 60) m = 0;
+        // if (h > 12) h = 0;
         watchFace.editor.putInt("h", h + 1).putInt("m", m + 1).apply();
         h12 = h % 12;
         m5 = (int) Math.floor(m / 5);
 
         Log.d(WatchFace.TAG, m5 + " " + h12 + " " + h + ":" + m);
+
         // Reset the status matrix
         for (int i1 = 0; i1 < matrix.length; i1++)
             for (int l1 = 0; l1 < matrix[i1].length; l1++) {
