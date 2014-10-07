@@ -21,6 +21,7 @@ public class MatrixManager {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
     private final WatchFace watchFace;
@@ -37,7 +38,8 @@ public class MatrixManager {
             {"F", "O", "U", "R", "F", "I", "V", "E", "T", "W", "O", ""},
             {"E", "I", "G", "H", "T", "E", "L", "E", "V", "E", "N", "\n"},
             {"S", "E", "V", "E", "N", "T", "W", "E", "L", "V", "E", ""},
-            {"T", "E", "N", "S", "O", "'", "C", "L", "O", "C", "K", "\n"}
+            {"T", "E", "N", "S", "O", "'", "C", "L", "O", "C", "K", "\n"},
+            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
     };
     private String MATRIX_DE[][] = new String[][]{
             {"E", "S", "K", "I", "S", "T", "A", "F", "Ü", "N", "F", ""},
@@ -49,7 +51,8 @@ public class MatrixManager {
             {"F", "Ü", "N", "F", "T", "O", "S", "E", "C", "H", "S", ""},
             {"S", "I", "E", "B", "E", "N", "L", "A", "C", "H", "T", "\n"},
             {"N", "E", "U", "N", "Z", "E", "H", "N", "E", "L", "F", ""},
-            {"Z", "W", "Ö", "L", "F", "U", "N", "K", "U", "H", "R", "\n"}
+            {"Z", "W", "Ö", "L", "F", "U", "N", "K", "U", "H", "R", "\n"},
+            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
     };
 
     private String MATRIX_NL[][] = new String[][]{
@@ -62,7 +65,8 @@ public class MatrixManager {
             {"V", "I", "J", "F", "Z", "E", "S", "E", "L", "F", "S", ""},
             {"Z", "E", "V", "E", "N", "A", "L", "A", "C", "H", "T", "\n"},
             {"N", "E", "G", "E", "N", "T", "I", "E", "N", "L", "F", ""},
-            {"T", "W", "A", "A", "L", "F", "N", "K", "U", "U", "R", "\n"}
+            {"T", "W", "A", "A", "L", "F", "N", "K", "U", "U", "R", "\n"},
+            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
     };
 
     private String MATRIX_FR[][] = new String[][]{
@@ -75,7 +79,8 @@ public class MatrixManager {
             {"M", "O", "I", "N", "S", "O", "L", "E", "D", "I", "X", ""},
             {"E", "T", "R", "Q", "U", "A", "R", "T", "R", "E", "D", "\n"},
             {"V", "I", "N", "G", "T", "-", "C", "I", "N", "Q", "U", ""},
-            {"E", "T", "S", "D", "E", "M", "I", "E", "P", "A", "N", "\n"}
+            {"E", "T", "S", "D", "E", "M", "I", "E", "P", "A", "N", "\n"},
+            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
     };
     private int VALUES_EN[][] = new int[][]{
             {0, 0, 1}, // IT
@@ -211,11 +216,7 @@ public class MatrixManager {
         calendar.setTime(date);
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int m = calendar.get(Calendar.MINUTE);
-        //int h = watchFace.settings.getInt("h", 0);
-        //int m = watchFace.settings.getInt("m", 0);
-        //if (m > 60) m = 0;
-        // if (h > 12) h = 0;
-        watchFace.editor.putInt("h", h + 1).putInt("m", m + 1).apply();
+
         h12 = h % 12;
         m5 = (int) Math.floor(m / 5);
 

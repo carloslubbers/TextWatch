@@ -6,8 +6,13 @@
     <string name="height_label">Set height of the text (0 = center, 5 = top)</string>
     <string name="theme_dark">Apply Dark Theme</string>
     <string name="theme_light">Apply Light Theme</string>
-    <string name="disclaimer">Thank you for using my watch face! These customization options are VERY beta, they might not always work. Also, it is currently not possible to change UI elements like the cards size or the \"OK Google\" text without root!\n\nIf you have any questions or suggestions please send me an e-mail via the Play Store.</string>
+    <string name="disclaimer">Thank you for using my watch face! The customization settings have been moved to the Settings menu (use the 3 dots button to get there). The settings have changed a bit, so try to find the best setup for your watch. Round watches should also be supported now.</string>
     <string name="padding_label">Set the padding on the left side of the text</string>
     <string name="label_fontsize">Font Size</string>
+    <string name="settings_height">Text Height</string>
+    <string name="settings_padding">Padding Left (dp)</string>
+    <string name="settings_size">Font Size</string>
+    <string name="settings_lang">Language</string>
+    <string name="settings_theme">Theme</string>
 
 </resources>

@@ -1,28 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.wearable.view.WatchViewStub xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/watch_view_stub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
-
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:contentDescription="Watchface" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:paddingLeft="3dp"
-        android:text="Starting..."
-        android:textSize="13dp"
-        android:typeface="monospace" />
-
-
-</RelativeLayout>
+    app:rectLayout="@layout/rect_activity_watch_face"
+    app:roundLayout="@layout/round_activity_watch_face">
+    <!-- Yes, this is empty -->
+</android.support.wearable.view.WatchViewStub>

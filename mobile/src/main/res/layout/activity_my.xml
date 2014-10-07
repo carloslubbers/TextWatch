@@ -8,127 +8,128 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MyActivity">
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:longClickable="false"
-        android:max="5" />
+    <!-- <SeekBar
+         android:id="@+id/seekBar"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentEnd="true"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/textView"
+         android:longClickable="false"
+         android:max="5" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/seekBar"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/statusText"
-        android:text="@string/height_label" />
+     <TextView
+         android:id="@+id/textView"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignEnd="@+id/seekBar"
+         android:layout_alignParentStart="true"
+         android:layout_alignTop="@+id/darkButton"
+         android:text="@string/height_label" />
 
-    <TextView
-        android:id="@+id/statusText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/seekBar"
-        android:layout_alignParentTop="true" />
+     <TextView
+         android:id="@+id/darkButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignEnd="@+id/seekBar"
+         android:layout_alignParentTop="true" />
 
-    <Button
-        android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/fontBar"
-        android:checked="false"
-        android:text="@string/theme_dark" />
+     <Button
+         android:id="@+id/radioButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentEnd="true"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/fontBar"
+         android:checked="false"
+         android:text="@string/theme_dark" />
 
-    <Button
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/radioButton"
-        android:checked="false"
-        android:text="@string/theme_light" />
+     <Button
+         android:id="@+id/radioButton2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignEnd="@+id/textView2"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/radioButton"
+         android:checked="false"
+         android:text="@string/theme_light" />
 
+
+
+     <Button
+         android:id="@+id/enButton"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/radioButton2"
+         android:text="English" />
+
+     <Button
+         android:id="@+id/deButton"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/radioButton2"
+         android:layout_toRightOf="@+id/enButton"
+         android:text="Deutsch" />
+
+     <Button
+         android:id="@+id/nlButton"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/radioButton2"
+         android:layout_toRightOf="@+id/deButton"
+         android:text="Nederlands" />
+
+     <SeekBar
+         android:id="@+id/paddingBar"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignEnd="@+id/fontBar"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/textView3"
+         android:longClickable="false"
+         android:max="30" />
+
+     <TextView
+         android:id="@+id/textView3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignEnd="@+id/seekBar"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/seekBar"
+         android:text="@string/padding_label" />
+
+     <SeekBar
+         android:id="@+id/fontBar"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignEnd="@+id/radioButton"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/textView4"
+         android:indeterminate="false"
+         android:longClickable="false"
+         android:max="30" />
+
+     <TextView
+         android:id="@+id/textView4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignEnd="@+id/fontBar"
+         android:layout_alignParentStart="true"
+         android:layout_below="@+id/paddingBar"
+         android:text="@string/label_fontsize" /> -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/seekBar"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:text="@string/disclaimer" />
-
-    <Button
-        android:id="@+id/enButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/radioButton2"
-        android:text="English" />
-
-    <Button
-        android:id="@+id/deButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/radioButton2"
-        android:layout_toRightOf="@+id/enButton"
-        android:text="Deutsch" />
-
-    <Button
-        android:id="@+id/nlButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/radioButton2"
-        android:layout_toRightOf="@+id/deButton"
-        android:text="Nederlands" />
-
-    <SeekBar
-        android:id="@+id/paddingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/fontBar"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
-        android:longClickable="false"
-        android:max="30" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/seekBar"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/seekBar"
-        android:text="@string/padding_label" />
-
-    <SeekBar
-        android:id="@+id/fontBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/radioButton"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView4"
-        android:indeterminate="false"
-        android:longClickable="false"
-        android:max="30" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/fontBar"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/paddingBar"
-        android:text="@string/label_fontsize" />
 
     <Button
         android:id="@+id/frButton"

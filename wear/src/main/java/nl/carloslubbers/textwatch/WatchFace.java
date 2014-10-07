@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -26,13 +27,15 @@ public class WatchFace extends Activity {
     public SharedPreferences.Editor editor;
     public MatrixManager matrixManager;
     public String heightString = "";
+    WatchViewStub stub;
+    TextView tv;
     private MessageListener messageListener;
-    private TimerTask doAsynchronousTask = null;
+
     /**
      * Starts the asynchronous scheduled task to update the text
      */
     public void callAsynchronousTask() {
-        doAsynchronousTask = null;
+        TimerTask doAsynchronousTask;
         doAsynchronousTask = new TimerTask() {
             @Override
             public void run() {
@@ -59,10 +62,21 @@ public class WatchFace extends Activity {
         super.onCreate(bundle);
         setContentView(R.layout.activity_watch_face);
 
+        stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+            @Override
+            public void onLayoutInflated(WatchViewStub stub) {
+                tv = (TextView) stub.findViewById(R.id.textView);
+            }
+        });
+
+        stub.inflate();
+
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = settings.edit();
         matrixManager = new MatrixManager(this);
         messageListener = new MessageListener(this);
+
         initConfig();
 
         callAsynchronousTask();
@@ -95,10 +109,10 @@ public class WatchFace extends Activity {
         matrixManager.setLanguage(settings.getString("lang", "en"));
         setHeight(Integer.parseInt(settings.getString("height", "3")));
         setWatchTheme(settings.getString("theme", "dark"));
-        setPadding(settings.getInt("padding", 3));
+        setPadding(settings.getInt("padding", 0));
         setFontSize(settings.getInt("fontsize", 0));
         Typeface typeface = Typeface.createFromAsset(getAssets(), "Anonymous.ttf");
-        ((TextView) findViewById(R.id.textView)).setTypeface(typeface);
+        tv.setTypeface(typeface);
     }
 
     private void googleApiConnect() {
@@ -127,11 +141,12 @@ public class WatchFace extends Activity {
         Log.v("TextWatch", "Height: " + h);
         editor.putString("height", String.valueOf(h));
         editor.commit();
-        heightString = "";
+        tv.setPadding(tv.getPaddingLeft(), h * 10, tv.getPaddingRight(), tv.getPaddingBottom());
+        /**heightString = "";
         matrixManager.getMatrix()[9][11] = "";
         for (int i = 0; i < h; i++) {
             heightString += "<br/>";
-        }
+         }*/
     }
 
     /**
@@ -159,11 +174,11 @@ public class WatchFace extends Activity {
 
     protected void setPadding(int p) {
         editor.putInt("padding", p).apply();
-        (findViewById(R.id.textView)).setPadding(p, 0, 0, 0);
+        tv.setPadding(p, tv.getPaddingTop(), tv.getPaddingRight(), tv.getPaddingBottom());
     }
 
     public void setFontSize(int i) {
         editor.putInt("fontsize", i).apply();
-        ((TextView) findViewById(R.id.textView)).setTextSize((float) (13 + 0.1 * i));
+        tv.setTextSize((float) (13 + 0.1 * i));
     }
 }

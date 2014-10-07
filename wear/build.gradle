@@ -9,8 +9,8 @@ android {
         applicationId "nl.carloslubbers.textwatch"
         minSdkVersion 20
         targetSdkVersion 20
-        versionCode 5
-        versionName "1.4"
+        versionCode 8
+        versionName "1.7"
     }
     buildTypes {
         release {

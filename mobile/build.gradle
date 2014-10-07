@@ -8,8 +8,8 @@ android {
         applicationId "nl.carloslubbers.textwatch"
         minSdkVersion 18
         targetSdkVersion 18
-        versionCode 6
-        versionName "1.5"
+        versionCode 8
+        versionName "1.7"
     }
     buildTypes {
         release {
@@ -24,4 +24,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     wearApp project(':wear')
     compile 'com.google.android.gms:play-services-wearable:+'
+    // You must install or update the Support Repository through the SDK manager to use this dependency.
+    compile 'com.android.support:support-v4:19.+'
 }

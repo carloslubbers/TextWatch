@@ -1,6 +1,7 @@
 package nl.carloslubbers.textwatch;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,9 +9,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.SeekBar;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyActivity extends Activity implements View.OnClickListener {
+public class MyActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String TAG = "TextWatch";
     private GoogleApiClient mGoogleApiClient;
 
@@ -38,80 +36,8 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
         // Load preferences
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final SharedPreferences.Editor editor = settings.edit();
 
-        // Define elements
-        final SeekBar heightBar = (SeekBar) findViewById(R.id.seekBar);
-        final SeekBar paddingBar = (SeekBar) findViewById(R.id.paddingBar);
-        final SeekBar fontBar = (SeekBar) findViewById(R.id.fontBar);
-        final Button darkRadio = (Button) findViewById(R.id.radioButton);
-        final Button lightRadio = (Button) findViewById(R.id.radioButton2);
-        final Button enButton = (Button) findViewById(R.id.enButton);
-        final Button deButton = (Button) findViewById(R.id.deButton);
-        final Button nlButton = (Button) findViewById(R.id.nlButton);
-        final Button frButton = (Button) findViewById(R.id.frButton);
-        enButton.setOnClickListener(this);
-        deButton.setOnClickListener(this);
-        nlButton.setOnClickListener(this);
-        frButton.setOnClickListener(this);
-        darkRadio.setOnClickListener(this);
-        lightRadio.setOnClickListener(this);
-
-        // Restore seeker
-        heightBar.setProgress(Integer.parseInt(settings.getString("height", "5")));
-        heightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                editor.putString("height", String.valueOf(i)).apply();
-                updateHeight(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-
-        paddingBar.setProgress(settings.getInt("padding", 0));
-        paddingBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                editor.putInt("padding", i).apply();
-                updatePadding(i + 3);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        fontBar.setProgress(settings.getInt("fontsize", 0));
-        fontBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                editor.putInt("fontsize", i).apply();
-                updateFontSize(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 
         //  Google API client for communication between devices
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -230,7 +156,14 @@ public class MyActivity extends Activity implements View.OnClickListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+        switch (id) {
+            case R.id.action_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -247,32 +180,24 @@ public class MyActivity extends Activity implements View.OnClickListener {
         return nodes;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.radioButton:
-                setWatchTheme("dark");
-                break;
-            case R.id.radioButton2:
-                setWatchTheme("light");
-                break;
-            case R.id.enButton:
-                setLanguage("en");
-                break;
-            case R.id.deButton:
-                setLanguage("de");
-                break;
-            case R.id.nlButton:
-                setLanguage("nl");
-                break;
-            case R.id.frButton:
-                setLanguage("fr");
-                break;
-        }
-
-    }
-
     private void setLanguage(String lang) {
         sendMessage("/config/lang/" + lang);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        Log.i(TAG, s);
+        if (s.equals("height")) {
+            updateHeight(Integer.parseInt(sharedPreferences.getString("height", "0")));
+        } else if (s.equals("lang")) {
+            setLanguage(sharedPreferences.getString("lang", "en"));
+        } else if (s.equals("size")) {
+            updateFontSize(Integer.parseInt(sharedPreferences.getString("size", "0")));
+        } else if (s.equals("theme")) {
+            setWatchTheme(sharedPreferences.getString("theme", "dark"));
+        } else if (s.equals("padding")) {
+            updatePadding(Integer.parseInt(sharedPreferences.getString("padding", "0")));
+        }
+
     }
 }
