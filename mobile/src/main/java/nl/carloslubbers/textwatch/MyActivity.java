@@ -64,7 +64,7 @@ public class MyActivity extends Activity implements SharedPreferences.OnSharedPr
         mGoogleApiClient.connect();
 
         // Restore theme
-        if (settings.getString("theme", "dark").equals("dark")) {
+        if (settings.getString("theme-v2", "dark").equals("dark")) {
             setWatchTheme("dark");
         } else {
             setWatchTheme("light");
@@ -187,16 +187,16 @@ public class MyActivity extends Activity implements SharedPreferences.OnSharedPr
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         Log.i(TAG, s);
-        if (s.equals("height")) {
-            updateHeight(Integer.parseInt(sharedPreferences.getString("height", "0")));
-        } else if (s.equals("lang")) {
-            setLanguage(sharedPreferences.getString("lang", "en"));
-        } else if (s.equals("size")) {
-            updateFontSize(Integer.parseInt(sharedPreferences.getString("size", "0")));
-        } else if (s.equals("theme")) {
-            setWatchTheme(sharedPreferences.getString("theme", "dark"));
-        } else if (s.equals("padding")) {
-            updatePadding(Integer.parseInt(sharedPreferences.getString("padding", "0")));
+        if (s.equals("height-v2")) {
+            updateHeight(Integer.parseInt(sharedPreferences.getString("height-v2", "0")));
+        } else if (s.equals("lang-v2")) {
+            setLanguage(sharedPreferences.getString("lang-v2", "en"));
+        } else if (s.equals("size-v2")) {
+            updateFontSize(Integer.parseInt(sharedPreferences.getString("size-v2", "0")));
+        } else if (s.equals("theme-v2")) {
+            setWatchTheme(sharedPreferences.getString("theme-v2", "dark"));
+        } else if (s.equals("padding-v2")) {
+            updatePadding(Integer.parseInt(sharedPreferences.getString("padding-v2", "0")));
         }
 
     }

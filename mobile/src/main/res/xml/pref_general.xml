@@ -4,7 +4,7 @@
         android:defaultValue="3"
         android:entries="@array/settings_height_entries"
         android:entryValues="@array/settings_height_values"
-        android:key="height"
+        android:key="height-v2"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/settings_height" />
@@ -13,7 +13,7 @@
         android:defaultValue="3"
         android:entries="@array/settings_padding_entries"
         android:entryValues="@array/settings_padding_values"
-        android:key="padding"
+        android:key="padding-v2"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/settings_padding" />
@@ -22,7 +22,7 @@
         android:defaultValue="0"
         android:entries="@array/settings_size_entries"
         android:entryValues="@array/settings_size_values"
-        android:key="size"
+        android:key="size-v2"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/settings_size" />
@@ -31,7 +31,7 @@
         android:defaultValue="en"
         android:entries="@array/settings_lang_entries"
         android:entryValues="@array/settings_lang_values"
-        android:key="lang"
+        android:key="lang-v2"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/settings_lang" />
@@ -40,7 +40,7 @@
         android:defaultValue="dark"
         android:entries="@array/settings_theme_entries"
         android:entryValues="@array/settings_theme_values"
-        android:key="theme"
+        android:key="theme-v2"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/settings_theme" />

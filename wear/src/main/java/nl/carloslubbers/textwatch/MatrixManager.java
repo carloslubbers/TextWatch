@@ -39,7 +39,7 @@ public class MatrixManager {
             {"E", "I", "G", "H", "T", "E", "L", "E", "V", "E", "N", "\n"},
             {"S", "E", "V", "E", "N", "T", "W", "E", "L", "V", "E", ""},
             {"T", "E", "N", "S", "O", "'", "C", "L", "O", "C", "K", "\n"},
-            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
+            {"", "", "•", " ", "•", " ", "•", " ", "•", "", "", "\n"}
     };
     private String MATRIX_DE[][] = new String[][]{
             {"E", "S", "K", "I", "S", "T", "A", "F", "Ü", "N", "F", ""},
@@ -52,8 +52,7 @@ public class MatrixManager {
             {"S", "I", "E", "B", "E", "N", "L", "A", "C", "H", "T", "\n"},
             {"N", "E", "U", "N", "Z", "E", "H", "N", "E", "L", "F", ""},
             {"Z", "W", "Ö", "L", "F", "U", "N", "K", "U", "H", "R", "\n"},
-            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
-    };
+            {"", "", "•", " ", "•", " ", "•", " ", "•", "", "", "\n"}};
 
     private String MATRIX_NL[][] = new String[][]{
             {"H", "E", "T", "O", "I", "S", "A", "V", "I", "J", "F", ""},
@@ -66,8 +65,7 @@ public class MatrixManager {
             {"Z", "E", "V", "E", "N", "A", "L", "A", "C", "H", "T", "\n"},
             {"N", "E", "G", "E", "N", "T", "I", "E", "N", "L", "F", ""},
             {"T", "W", "A", "A", "L", "F", "N", "K", "U", "U", "R", "\n"},
-            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
-    };
+            {"", "", "•", " ", "•", " ", "•", " ", "•", "", "", "\n"}};
 
     private String MATRIX_FR[][] = new String[][]{
             {"I", "L", "N", "E", "S", "T", "O", "U", "N", "E", "R", ""},
@@ -80,8 +78,7 @@ public class MatrixManager {
             {"E", "T", "R", "Q", "U", "A", "R", "T", "R", "E", "D", "\n"},
             {"V", "I", "N", "G", "T", "-", "C", "I", "N", "Q", "U", ""},
             {"E", "T", "S", "D", "E", "M", "I", "E", "P", "A", "N", "\n"},
-            {"", "", "", "", "", "", "    ", "", "", "", "", "\n"}
-    };
+            {"", "", "•", " ", "•", " ", "•", " ", "•", "", "", "\n"}};
     private int VALUES_EN[][] = new int[][]{
             {0, 0, 1}, // IT
             {0, 3, 4}, // IS
@@ -231,6 +228,27 @@ public class MatrixManager {
         // It is...
         setStatus(0); // it
         setStatus(1); // is
+
+        // Minute dots
+        switch (m % 5) {
+            case 1:
+                status[10][2] = 1;
+                break;
+            case 2:
+                status[10][2] = 1;
+                status[10][4] = 1;
+                break;
+            case 3:
+                status[10][2] = 1;
+                status[10][4] = 1;
+                status[10][6] = 1;
+                break;
+            case 4:
+                status[10][2] = 1;
+                status[10][4] = 1;
+                status[10][6] = 1;
+                status[10][8] = 1;
+        }
 
         // Hour
         if (language.equals("en")) {
